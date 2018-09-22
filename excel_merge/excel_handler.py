@@ -49,7 +49,13 @@ def merge_excel(filename: str):
         refund_amount = get_refund_by_id(refund_ids, refund_amounts, trans_id)
 
         if refund_amount:
-            w_trans_sheet.write(row_index, 5, refund_amount * float(trans_rate[row_index]))
+            try:
+                rate = trans_rate[row_index]
+                if not rate:
+                    rate = 0
+                w_trans_sheet.write(row_index, 5, str(refund_amount * float(rate)))
+            except ValueError:
+                print(trans_rate[row_index])
 
     for row_index, refund_id in enumerate(refund_ids):
         if refund_id not in trans_ids:

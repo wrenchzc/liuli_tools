@@ -1,9 +1,10 @@
 from flask import Flask
 from flask import render_template
-from flask import Response
+from flask import Response, send_file
 from flask import request
 from tempfile import gettempdir
 import time
+from excel_merge.excel_handler import merge_excel
 
 app = Flask(__name__)
 
@@ -21,7 +22,9 @@ def do_upload_excel():
         content = file_data.read()
         f.write(content)
 
-    return Response("aaa")
+    tmp_file = merge_excel(file_name)
+
+    return send_file(tmp_file, as_attachment=True)
 
 
 if __name__ == '__main__':
