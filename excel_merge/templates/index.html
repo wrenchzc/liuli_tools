@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+  <body>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1><a href="/">tools for LiuLi, Excel Operation</a></h1>
+      </div>
+
+      <div>
+        <h2>Excel file</h2> <!-- <a href="/classify_url?imageurl=http%3A%2F%2Fi.telegraph.co.uk%2Fmultimedia%2Farchive%2F02351%2Fcross-eyed-cat_2351472k.jpg">Click for a Quick Example</a> -->
+      </div>
+
+      {% if has_result %}
+      {% if not result[0] %}
+      <!-- we have error in the result. -->
+      <div class="alert alert-danger">{{ result[1] }} Did you provide a valid URL or a valid image file? </div>
+      {% else %}
+      <div class="media">
+        <div class="media-body">
+          <p> image name: {{ result[3] }} ) </p>
+          <p> -------------------------------------------------- </p>
+          <div class="bs-example bs-example-tabs">
+            <ul class="nav">
+              <li> <h4> <font style='color:#7c18d3;'>Top {{ result[1] | length }} classes</font> </h4> </li>
+            </ul>
+            <div>
+              <div>
+                <ul class="list-group">
+                  {% for single_pred in result[1] %}
+                  <li class="list-group-item">
+                  <span class="badge">{{ single_pred[1] }}</span>
+                  <h4 class="list-group-item-heading">
+                    <a href="https://www.google.com/#q={{ single_pred[0] }}" target="_blank">{{ single_pred[0] }} ( {{ single_pred[2] }} )</a>
+                  </h4>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <p> CNN took {{ result[2] }} seconds. </p>
+      {% endif %}
+      <hr>
+      {% endif %}
+
+
+      <form id="formupload" class="form-inline" role="form" action="upload_excel" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="imagefile">Or upload an image:</label>
+          <input type="file" name="excelfile" id="excelfile">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Classify File" id="classifyfile"></input>
+      </form>
+
+      <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" width="100%" height="100%" src={{ imagesrc }}></a>
+      </div>
+    </div>
+
+    <hr>
+    <div id="footer">
+      <div class="container">
+        <p>&copy; MalongTech 2016</p>
+      </div>
+   </div>
+
+  </body>
+</html>
