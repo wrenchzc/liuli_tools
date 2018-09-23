@@ -7,8 +7,8 @@ def test_excel_merge():
     trans_sheet = excel_read_book.sheet_by_index(1)
     refund_sheet = excel_read_book.sheet_by_index(2)
 
-    assert trans_sheet.cell(1, 5).value == str(321.1904)
-    assert trans_sheet.cell(2, 5).value == str(422.01423)
+    assert trans_sheet.cell(1, 5).value == str(12.752560475032878)
+    assert trans_sheet.cell(2, 5).value == str(16.83945586384611)
     v = trans_sheet.cell(3, 5).value
     assert v is None or str(v).strip() == '-' or str(v).strip() == ''
 

@@ -53,7 +53,7 @@ def merge_excel(filename: str):
                 rate = trans_rate[row_index]
                 if not rate:
                     rate = 0
-                w_trans_sheet.write(row_index, 5, str(refund_amount * float(rate)))
+                w_trans_sheet.write(row_index, 5, str(refund_amount / float(rate)))
             except ValueError:
                 print(trans_rate[row_index])
 
