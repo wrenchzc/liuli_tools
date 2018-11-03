@@ -37,6 +37,7 @@ def merge_excel(filename: str):
     refund_ids = strip_strs(sheet_refund.col_values(0))
     refund_amounts = strip_strs(sheet_refund.col_values(8))
 
+    w_trans_sheet.write(0, 13, "refund RMB")
     for row_index, trans_id in enumerate(trans_ids):
         # first line is head
         if row_index == 0:
@@ -56,6 +57,7 @@ def merge_excel(filename: str):
 
                 if rate != 0:
                     w_trans_sheet.write(row_index, 5, str(refund_amount / float(rate)))
+                    w_trans_sheet.write(row_index, 13, str(refund_amount))
             except ValueError:
                 print(trans_rate[row_index])
 
